@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seya Companion Widget</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url('https://t4.ftcdn.net/jpg/02/69/64/25/360_F_269642577_CBnGLlnSRPlbA3P5axgHIR2wZtUsBmtD.jpg');
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      cursor: none;
+    }
+    #widget-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 200px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+    img#seya-img {
+      width: 100px;
+      height: auto;
+      position: absolute;
+      pointer-events: none;
+    }
+    h1 {
+      color: #333;
+    }
+    #response-container {
+      height: 100px;
+      overflow-y: scroll;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+    .callout {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      margin-bottom: 5px;
+      border-radius: 5px;
+    }
+    .callout p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div id="widget-container">
+  <img id="seya-img" src="https://media.tenor.com/hE0T8D0GpXsAAAAC/joinblink-blink.gif" alt="Seya GIF">
+  <h1>Welcome back, Master!</h1>
+  <div id="response-container"></div>
+</div>
+
+<script>
+  // Function to display response
+  function displayResponse(response) {
+    var responseContainer = document.getElementById('response-container');
+    var callout = document.createElement('div');
+    callout.classList.add('callout');
+    callout.innerHTML = '<p>' + response + '</p>';
+    responseContainer.appendChild(callout);
+    responseContainer.scrollTop = responseContainer.scrollHeight;
+  }
+
+  // Seya following mouse
+  document.addEventListener('mousemove', function(event) {
+    var seyaImg = document.getElementById('seya-img');
+    seyaImg.style.top = (event.clientY - seyaImg.offsetHeight / 2) + 'px';
+    seyaImg.style.left = (event.clientX - seyaImg.offsetWidth / 2) + 'px';
+  });
+
+  // Advice button click event
+  document.addEventListener('click', function() {
+    var responses = [
+      "Remember, every setback is a setup for a comeback, Master!",
+      "Take small steps every day towards your goals, Master.",
+      "Don't be afraid to ask for help when you need it, Master.",
+      "Believe in yourself, you're capable of great things, Master!"
+    ];
+    var randomIndex = Math.floor(Math.random() * responses.length);
+    displayResponse(responses[randomIndex]);
+  });
+</script>
+
+</body>
+</html>
